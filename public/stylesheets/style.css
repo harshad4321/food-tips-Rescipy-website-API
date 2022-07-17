@@ -1,0 +1,23 @@
+:root{
+  --bs-font-sans-serif:'Rubik',sans-serif;
+}
+
+ body{
+  background-image: url("/img/backgroung-food.svg");
+  background-color: rgba(243, 243, 243, 0.746);
+ }
+ a { color: var(--bs-dark); }
+
+header {
+  text-align: center;
+  background: #e0ca9ee8;
+  color: rgba(255, 255, 255, 0.801);
+  
+}
+img{
+  border-radius: 50%;
+}
+
+
+
+
