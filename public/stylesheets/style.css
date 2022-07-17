@@ -4,20 +4,52 @@
 
  body{
   background-image: url("/img/backgroung-food.svg");
-  background-color: rgba(243, 243, 243, 0.746);
+  background-color: rgb(243,243,243);
  }
  a { color: var(--bs-dark); }
 
 header {
   text-align: center;
   background: #e0ca9ee8;
-  color: rgba(255, 255, 255, 0.801);
-  
+
 }
-img{
+.img-1{
   border-radius: 50%;
+
+}
+.img-2{
+  border-radius: 25%;
+
 }
 
+/* Category Card */
+.category__link {
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  transition: 250ms all;
+}
+.category__link:hover {
+  transform: scale(1.1);
+}
+.category__img {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-bottom:10px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.787);
+  overflow: hidden;
+  border-radius: 80px;
+}
 
+.category__img--large {
 
-
+  height: 330px;
+}
+.category__img img {
+ 
+  width: 30%;
+  object-fit: cover;
+}
