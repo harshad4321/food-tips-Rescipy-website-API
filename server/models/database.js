@@ -1,11 +1,20 @@
-const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO-URL,{newUrlParser:true,useUnifiedTopology:true });
 
-const db= mongoose.Collection;
-db.findOne('error',console.error.bind(console,'connection errorrr..'));
-db.once('open',function(){
-console.log('Connected to db.....')
-});
+
+
+const dotenv= require('dotenv');
+const mongoose = require('mongoose')
+
+dotenv.config();
+
+//Connect to DB
+mongoose.connect(
+    process.env.MONGO_URI,
+{useNewUrlParser:true},
+()=>console.log('connected to db...'));
+
+
+
 
 //models#
 require('./Category')
+require('./Recipe');
