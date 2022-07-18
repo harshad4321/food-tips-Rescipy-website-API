@@ -1,8 +1,8 @@
 <section>
     <div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
         <div class="col-12 col-lg-4">
-            <img class="img-2" src=" /img/puttu.jpg" width="350" height="510" class="d-block mx-lg-auto img-fluid"
-                loading="lazy" alt="Cooking With Node.js" onContextMenu="return false;">
+            <img class="img-2" src=" /images/puttu.jpg" width="350" height="510" class="d-block mx-lg-auto img-fluid"
+                loading="lazy" onContextMenu="return false;">
 
         </div>
 
@@ -32,14 +32,14 @@
     <div class="row row-cols-5 row-cols-lg-4 g-2 g-lg-3 py-4">
         <a href="#" class="col text-center category__link">
             <div class="category__img shadow">
-                <img src=" /img/fish.jpg" width="300" alt="<%- category.name %>" loading="lazy">
+                <img src=" /images/fish.jpg" width="300" alt="<%- category.name %>" loading="lazy">
             </div>
             <div class="pt-1">
             </div>
         </a>
         <a href="#" class="col text-center category__link">
             <div class="category__img shadow">
-                <img src=" /img/fish.jpg" width="300" alt="<%- category.name %>" loading="lazy">
+                <img src=" /images/fish.jpg" width="300" alt="<%- category.name %>" loading="lazy">
             </div>
             <div class="pt-1">
             </div>
@@ -47,14 +47,14 @@
 
         <a href="#" class="col text-center category__link">
             <div class="category__img shadow">
-                <img src=" /img/fish.jpg" width="300" alt="<%- category.name %>" loading="lazy">
+                <img src=" /images/fish.jpg" width="300" alt="<%- category.name %>" loading="lazy">
             </div>
             <div class="pt-1">
             </div>
         </a>
         <a href="#" class="col text-center category__link">
             <div class="category__img shadow">
-                <img src=" /img/fish.jpg" width="300" alt="<%- category.name %>" loading="lazy">
+                <img src=" /images/fish.jpg" width="300" alt="<%- category.name %>" loading="lazy">
             </div>
             <div class="pt-1">
             </div>
@@ -62,7 +62,7 @@
 
         <a href="/categories" class="col text-center category__link">
             <div class="category__img shadow">
-                <img src="/img/chicken&kappa.jpg" alt="View All Categories" loading="lazy">
+                <img src="/images/chicken&kappa.jpg" alt="View All Categories" loading="lazy">
             </div>
             <div class="pt-1">View All</div>
         </a>
@@ -81,7 +81,7 @@
 
         <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="/img/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
+                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
             </div>
             <div class="pt-1">
 
@@ -90,7 +90,7 @@
 
         <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="/img/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
+                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
             </div>
             <div class="pt-1">
 
@@ -100,7 +100,7 @@
 
         <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="/img/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
+                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
             </div>
             <div class="pt-1">
 
@@ -108,7 +108,7 @@
         </a>
         <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="/img/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
+                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
             </div>
             <div class="pt-1">
 
@@ -116,10 +116,35 @@
         </a>
         <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="/img/20db0e55a18d117bfc1eed0974239996.jpg" alt=" <%=recipe.name %>" loading="lazy">
+                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg" alt=" <%=recipe.name %>" loading="lazy">
             </div>
             <div class="pt-1">
 
             </div>
         </a>
     </div>
+</section>
+<!-- Latest End -->
+
+<!-- Thai Start -->
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>Thai Recipes</h2>
+        <a href="/categories/Thai" class="ms-auto">View More</a>
+    </div>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+
+        <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+            <div class="category__img category__img--large shadow">
+                <img src="/uploads/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy">
+            </div>
+            <div class="pt-1">
+                {{!-- <%= recipe.name %> --}}
+            </div>
+        </a>
+
+
+        <p>No items found.</p>
+
+    </div>
+</section>
