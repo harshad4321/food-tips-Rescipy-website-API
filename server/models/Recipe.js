@@ -17,9 +17,9 @@ const recipeSchema = new mongoose.Schema({
     type: Array,
     required: 'This field is required.'
   },
-  category: {
+  categories: {
     type: String,
-    enum: ['appm', 'puttu', 'parotta'],
+    enum: ['spicy curry', 'Snacks', 'Breakfast','Lunch'],
     required: 'This field is required.'
   },
   image: {
