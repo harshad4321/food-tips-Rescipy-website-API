@@ -1,5 +1,5 @@
 require('../models/connection');
-const Category = require('../models/Category');
+const Category = require('../models/Category_Schema');
 // const Recipe = require('../models/Recipe');
 
 
@@ -10,6 +10,7 @@ const Category = require('../models/Category');
 
 
 exports.homepage = async(req, res) => {
+    
   try {
     const limitNumber = 4;
     const categories = await Category.find({}).limit(limitNumber);
