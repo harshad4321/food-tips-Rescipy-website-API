@@ -31,20 +31,32 @@
 <section>
     <div class="row row-cols-5 row-cols-lg-4 g-2 g-lg-3 py-4">
 
+
         {{#each categories}}
         <a href="#" class="col text-center category__link">
             <div class="category__img shadow">
-                <img src="/images/{{this.categories.image}}" width=" 300" alt="{{this.name}}" loading=" lazy">
+                <img src="{{this.categories.image}}" width=" 300" alt="" loading="lazy">
+
             </div>
-            <div class="pt-1">{{this.name}}
-            </div>
+            <div class="pt-1">
+                {{this.name}} </div>
         </a>
         {{/each}}
 
 
+        {{!-- {{#each categories(function('category,index'))}} <a href="#" class="col text-center category__link">
+            <div class="category__img shadow">
+                <img src="/images/{{this.category.image}}" width=" 300" alt="{{this.categories.name}}" loading=" lazy">
+            </div>
+            <div class="pt-1">{{this.categories.name}}
+            </div>
+        </a>
+        {{/each}} --}}
+
+
         <a href="/categories" class="col text-center category__link">
             <div class="category__img shadow">
-                <img src="/images/chicken&kappa.jpg" alt="View All Categories" loading="lazy">
+                <img src="/images/unni appm.jpg" alt="View All Categories" loading="lazy">
             </div>
             <div class="pt-1">View All</div>
         </a>
@@ -63,7 +75,7 @@
 
         <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
+                <img src="/images/fish.jpg" alt="<%= recipe.name %>" loading="lazy">
             </div>
             <div class="pt-1">
 

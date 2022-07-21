@@ -3,12 +3,16 @@ const mongoose = require('mongoose');
 const categorySchema = new mongoose.Schema({
   name: {
     type: String,
-    required: 'This field is required.'
+    required: true
+  },
+  contentType: {
+    type: String,
+    required: true,
   },
   image: {
     type: String,
-    required: 'This field is required.'
+    required: true,
   },
 });
 
-module.exports = mongoose.model('Category', categorySchema);
+module.exports = mongoose.model('categories', categorySchema);
