@@ -61,12 +61,38 @@
         <h2>Latest Recipes</h2>
         <a href="/explore-latest" class="ms-auto">View More</a>
     </div>
-
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-
-
-
         {{#each recipes}}
+        {{#each this}}
+        {{#if image}}
+        <a href="/recipe/{{recipes._id}}" class="col text-center category__link">
+            <div class="category__img category__img--large shadow">
+                <img src="{{this.image}}" alt="" loading=" lazy">
+            </div>
+            <div class="pt-1">
+                {{this.name}} </div>
+        </a>
+        {{/if}}
+        {{/each}}
+        {{/each}}
+        {{#else}}
+        <p>No items found.</p>
+        {{/else}}
+    </div>
+</section>
+<!-- Latest End -->
+
+
+
+<!-- Latest Start -->
+
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>Breakfast Recipes</h2>
+        <a href="/catagories/Breakfast" class="ms-auto">View More</a>
+    </div>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        {{#each Breakfast}}
         {{#each this}}
         {{#if image}}
 
@@ -80,30 +106,68 @@
         {{/if}}
         {{/each}}
         {{/each}}
-        {{!-- {{#else}}
+        {{#else}}
         <p>No items found.</p>
-        {{/else}} --}}
+        {{/else}}
     </div>
 </section>
 <!-- Latest End -->
 
-<!-- Thai Start -->
-<section class=" pb-4 pt-4">
-    <div class="d-flex mb-2 align-items-center">
-        <h2>Thai Recipes</h2>
-        <a href="/categories/Thai" class="ms-auto">View More</a>
-    </div>
-    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
-        <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+<!-- Latest Start -->
+
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>Snacks Recipes</h2>
+        <a href="/catagories/Snacks" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        {{#each Snacks}}
+        {{#each this}}
+        {{#if image}}
+
+        <a href="/recipe/{{recipes._id}}" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="/uploads/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy">
+                <img src="{{this.image}}" alt="" loading=" lazy">
             </div>
             <div class="pt-1">
-                {{!-- <%= recipe.name %> --}}
-            </div>
+                {{this.name}} </div>
         </a>
-
-
+        {{/if}}
+        {{/each}}
+        {{/each}}
+        {{#else}}
+        <p>No items found.</p>
+        {{/else}}
     </div>
 </section>
+<!-- Latest End -->
+<!-- Latest Start -->
+
+<section class="pb-4 pt-4">
+    <div class="d-flex mb-2 align-items-center">
+        <h2>variety_dish Recipes</h2>
+        <a href="/catagories/Snacks" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        {{#each variety_dish}}
+        {{#each this}}
+        {{#if image}}
+        <a href="/recipe/{{recipes._id}}" class="col text-center category__link">
+            <div class="category__img category__img--large shadow">
+                <img src="{{this.image}}" alt="" loading=" lazy">
+            </div>
+            <div class="pt-1">
+                {{this.name}} </div>
+        </a>
+        {{/if}}
+        {{/each}}
+        {{/each}}
+        {{#else}}
+        <p>No items found.</p>
+        {{/else}}
+    </div>
+</section>
+<!-- Latest End -->

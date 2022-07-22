@@ -15,14 +15,14 @@ exports.homepage = async(req, res) => {
     const categories = await Category.find({}).limit(limitNumber);
 
     const recipes = await Recipe.find({}).sort({_id: -1}).limit(limitNumber);
-    // const Breakfast = await Recipe.find({ 'category': 'Breakfast' }).limit(limitNumber);
-    // const Snacks = await Recipe.find({ 'category': 'Snacks' }).limit(limitNumber);
-    // const variety_dish = await Recipe.find({ 'category': 'variety dish' }).limit(limitNumber);
-    // const Lunch = await Recipe.find({ 'category': 'Lunch' }).limit(limitNumber);
-    // const recipes = { recipes};
+    const Breakfast = await Recipe.find({ 'category': 'Breakfast' }).limit(limitNumber);
+    const Snacks = await Recipe.find({ 'category': 'Snacks' }).limit(limitNumber);
+    const variety_dish = await Recipe.find({ 'category': 'variety dish' }).limit(limitNumber);
+    const Lunch = await Recipe.find({ 'category': 'Lunch' }).limit(limitNumber);
+ 
     // console.log('food>>>>>>>>',food)
     console.log('categories>>>>>>',categories)
-    res.render('index', {categories,recipes} );
+    res.render('index', {categories,recipes,Breakfast,Snacks,variety_dish,Lunch} );
   } catch (error) {
     res.status(500).send({message: error.message || "Error Occured" });
   }
