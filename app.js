@@ -8,7 +8,7 @@ var indexRouter = require('./server/routes/index');
 var usersRouter = require('./server/routes/users');
 var hbs = require('express-handlebars');
 var app = express();
-var connectDB =require('./server/models/connection');// DB connection
+ var connectDB =require('./server/models/connection');// DB connection
 require('dotenv').config()
 
 // view engine setup
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const start =async()=>{
   try{   
 await connectDB(process.env.MONGO_URI,{useNewUrlParser:true})
-console.log()
+
 }catch(error){
   console.log(error); 
 }

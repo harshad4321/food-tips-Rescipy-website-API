@@ -34,7 +34,7 @@
         {{#each categories}}
         {{#each this}}
         {{#if image}}
-        <a href="#" class="col text-center category__link">
+        <a href="/categories" class="col text-center category__link">
             <div class="category__img shadow">
                 <img src="{{this.image}}" width=" 300" alt="" loading="lazy">
             </div>
@@ -45,20 +45,9 @@
         {{/each}}
         {{/each}}
 
-
-        {{!-- {{#each categories(function('category,index'))}} <a href="#" class="col text-center category__link">
-            <div class="category__img shadow">
-                <img src="/images/{{this.category.image}}" width=" 300" alt="{{this.categories.name}}" loading=" lazy">
-            </div>
-            <div class="pt-1">{{this.categories.name}}
-            </div>
-        </a>
-        {{/each}} --}}
-
-
         <a href="/categories" class="col text-center category__link">
             <div class="category__img shadow">
-                <img src="/images/unni appm.jpg" alt="View All Categories" loading="lazy">
+                <img src="/images/malabar_parotta.jpg" alt="View All Categories" loading="lazy">
             </div>
             <div class="pt-1">View All</div>
         </a>
@@ -75,55 +64,31 @@
 
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
-        <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+
+
+        {{#each recipes}}
+        {{#each this}}
+        {{#if image}}
+
+        <a href="/recipe/{{recipes._id}}" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
-                <img src="/images/fish.jpg" alt="<%= recipe.name %>" loading="lazy">
+                <img src="{{this.image}}" alt="" loading=" lazy">
             </div>
             <div class="pt-1">
-
-            </div>
+                {{this.name}} </div>
         </a>
-
-        <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
-            </div>
-            <div class="pt-1">
-
-            </div>
-        </a>
-
-
-        <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
-            </div>
-            <div class="pt-1">
-
-            </div>
-        </a>
-        <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg " alt="<%= recipe.name %>" loading="lazy">
-            </div>
-            <div class="pt-1">
-
-            </div>
-        </a>
-        <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
-            <div class="category__img category__img--large shadow">
-                <img src="/images/20db0e55a18d117bfc1eed0974239996.jpg" alt=" <%=recipe.name %>" loading="lazy">
-            </div>
-            <div class="pt-1">
-
-            </div>
-        </a>
+        {{/if}}
+        {{/each}}
+        {{/each}}
+        {{!-- {{#else}}
+        <p>No items found.</p>
+        {{/else}} --}}
     </div>
 </section>
 <!-- Latest End -->
 
 <!-- Thai Start -->
-<section class="pb-4 pt-4">
+<section class=" pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
         <h2>Thai Recipes</h2>
         <a href="/categories/Thai" class="ms-auto">View More</a>
@@ -139,8 +104,6 @@
             </div>
         </a>
 
-
-        <p>No items found.</p>
 
     </div>
 </section>
