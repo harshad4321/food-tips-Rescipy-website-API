@@ -12,12 +12,30 @@
     {{#each categories}}
     {{#each this}}
     {{#if image}}
-    <a href="/categories" class="col text-center category__link">
+    <a href="/categories/{{this.name}}" class="col text-center category__link">
         <div class="category__img shadow">
             <img src="{{this.image}}" alt="{{this.name}}" loading="lazy">
         </div>
         <div class="pt-1">
             {{this.name}} </div>
+    </a>
+    {{/if}}
+    {{/each}}
+    {{/each}}
+</div>
+
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mb-4 ">
+    {{#each categoryById}}
+    {{#each this}}
+    {{#if image}}
+    <a href="/recipe/{{_id}} " class="col text-center category__link">
+        <div class="category__img category__img--large shadow">
+            <img src="{{this.image }}" alt="{{this.name}} " loading="lazy">
+        </div>
+        <div class="pt-1">
+            {{this.name}}
+        </div>
     </a>
     {{/if}}
     {{/each}}

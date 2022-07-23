@@ -66,9 +66,9 @@ exports.exploreRecipe = async(req, res) => {
 exports.exploreCategoriesById = async(req, res) => { 
   try {
     let categoryId = req.params.id;
-    const limitNumber = 20;
-    const categoryById = await Recipe.find({ 'category': categoryId }).limit(limitNumber);
-    res.render('categories', {  categoryById } );
+    const limitNumber = 7;
+    const categoryById = await Recipe.find({ 'categories': categoryId }).limit(limitNumber);
+    res.render('categories', {categoryById} );
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
