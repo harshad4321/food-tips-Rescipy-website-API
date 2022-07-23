@@ -117,3 +117,12 @@ exports.exploreRandom = async(req, res) => {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
+/**
+ * GET /submit-recipe
+ * Submit Recipe
+*/
+exports.submitRecipe = async(req, res) => {
+  const infoErrorsObj = req.flash('infoErrors');
+  const infoSubmitObj = req.flash('infoSubmit');
+  res.render('submit-recipe', { title: 'Cooking Blog - Submit Recipe', infoErrorsObj, infoSubmitObj  } );
+}
