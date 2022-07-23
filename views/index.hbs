@@ -61,11 +61,13 @@
         <h2>Latest Recipes</h2>
         <a href="/explore-latest" class="ms-auto">View More</a>
     </div>
+
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+
         {{#each recipes}}
         {{#each this}}
         {{#if image}}
-        <a href="/recipe/{{recipes._id}}" class="col text-center category__link">
+        <a href="/recipe/{{this._id}}" class="col text-center category__link">
             <div class="category__img category__img--large shadow">
                 <img src="{{this.image}}" alt="" loading=" lazy">
             </div>

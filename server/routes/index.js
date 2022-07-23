@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var categoryHelpers = require('../../helpers/category-helpers')
-const { resolveInclude } = require('ejs');
 const recipeController = require('../controller/recipeController');
 
 require('../models/connection');
@@ -11,7 +9,9 @@ require('../models/connection');
 */
 
 router.get('/', recipeController.homepage )
+router.get('/recipe/:id', recipeController.exploreRecipe );
 router.get('/categories', recipeController.exploreCategories);
+router.get('/categories/:id', recipeController.exploreCategoriesById);
 
 module.exports = router;
 
