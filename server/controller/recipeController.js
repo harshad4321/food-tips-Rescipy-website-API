@@ -73,3 +73,18 @@ exports.exploreCategoriesById = async(req, res) => {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
+
+/**
+ * POST /search
+ * Search 
+*/
+exports.searchRecipe = async(req,res) => {
+  try {
+    let searchTerm = req.body.searchTerm;
+    let recipe = await Recipe.find( { $text: { $search: searchTerm, $diacriticSensitive: true } });
+    res.render('search', {recipe} );
+  } catch (error) {
+    res.satus(500).send({message: error.message || "Error Occured" });
+  }
+  
+}
