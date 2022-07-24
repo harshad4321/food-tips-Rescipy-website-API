@@ -19,7 +19,7 @@ const recipeSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['Breakfast', 'Snacks', 'variety dish', 'Lunch'],
+    enum: ['Breakfast', 'Snacks', 'variety_dish', 'Lunch'],
     required: true,
   },
   image: {

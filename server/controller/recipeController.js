@@ -96,7 +96,7 @@ exports.exploreLatest = async(req, res) => {
   try {
     const limitNumber = 20;
     const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
-    res.render('explore-latest', { title: 'Cooking Blog - Explore Latest', recipe } );
+    res.render('explore-latest', { recipe } );
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
@@ -112,17 +112,19 @@ exports.exploreRandom = async(req, res) => {
     let count = await Recipe.find().countDocuments();
     let random = Math.floor(Math.random() * count);
     let recipe = await Recipe.findOne().skip(random).exec();
-    res.render('explore-random', { title: 'Cooking Blog - Explore Latest', recipe } );
+    res.render('explore-random', {  recipe } );
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
+
 /**
  * GET /submit-recipe
  * Submit Recipe
 */
 exports.submitRecipe = async(req, res) => {
-  const infoErrorsObj = req.flash('infoErrors');
-  const infoSubmitObj = req.flash('infoSubmit');
-  res.render('submit-recipe', { title: 'Cooking Blog - Submit Recipe', infoErrorsObj, infoSubmitObj  } );
+ 
+  res.render('submit-recipe', { title: 'food&tips - Submit Recipe'} );
 }
+
+
