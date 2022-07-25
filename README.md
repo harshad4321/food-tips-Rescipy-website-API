@@ -21,4 +21,6 @@ $ npm start
 ```
 
 
+# just a sample 
 
+![alt text](/public/images/food%26tips!!-Google.png)
