@@ -55,10 +55,9 @@ exports.exploreRecipe = async(req, res) => {
     res.render('recipe', {recipe} );
 
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occured" });
+    res.status(500).send({message: error.message || "Error Occured" });
   }
 } 
-
 /**
  * GET /categories/:id
  * Categories By Id
@@ -82,6 +81,7 @@ exports.searchRecipe = async(req,res) => {
   try {
     let searchTerm = req.body.searchTerm;
     let recipe = await Recipe.find( { $text: { $search: searchTerm, $diacriticSensitive: true } });
+    console.log('>>>>>',searchTerm)
     res.render('search', {recipe} );
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
@@ -101,8 +101,6 @@ exports.exploreLatest = async(req, res) => {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
-
-
 /**
  * GET /explore-random
  * Explore Random as JSON
@@ -117,29 +115,23 @@ exports.exploreRandom = async(req, res) => {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
-
 /**
  * GET /submit-recipe
  * Submit Recipe
 */
 exports.submitRecipe = async(req, res) => {
-  const infoErrorsObj = req.flash('infoErrors');
-  const infoSubmitObj = req.flash('infoSubmit');
-  res.render('submit-recipe', { title: 'food&tips - Submit Recipe', infoErrorsObj, infoSubmitObj} );
+  
+  res.render('submit-recipe', { title: 'food&tips - Submit Recipe'} );
 }
-
-
 /**
  * POST /submit-recipe
  * Submit Recipe
 */
 exports.submitRecipeOnPost = async(req, res) => {
   try {
-
     let imageUploadFile;
     let uploadPath;
     let newImageName;
-
     if(!req.files || Object.keys(req.files).length === 0){
       console.log('No Files where uploaded.');
     } else {
@@ -163,11 +155,11 @@ exports.submitRecipeOnPost = async(req, res) => {
     
     await newRecipe.save();
 
-     req.flash('infoSubmit', 'Recipe has been added.')
+    //  req.flash('infoSubmit', 'Recipe has been added.')
     res.redirect('/submit-recipe');
   } catch (error) {
     // res.json(error);
-     req.flash('infoErrors', error);
+    //  req.flash('infoErrors', error);
     res.redirect('/submit-recipe');
   }
 }

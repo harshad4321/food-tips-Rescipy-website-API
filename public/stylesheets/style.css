@@ -1,7 +1,7 @@
 :root{
   --bs-font-sans-serif:'Rubik',sans-serif;
 }
-
+ 
  body{
   background-image: url("/img/backgroung-food.svg");
   background-color: rgba(243, 243, 243, 0.548);
