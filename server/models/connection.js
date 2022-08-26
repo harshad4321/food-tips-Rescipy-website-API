@@ -9,8 +9,6 @@ return await mongoose.connect(url)
 
 }
 
-
-
 require('./Category_Schema');
 require('./Recipe_Schema')
 

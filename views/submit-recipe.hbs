@@ -10,11 +10,11 @@
 
   {{#if infoSubmitObj}}
   <div class="col-8 alert alert-success" role="alert">
-    {{ infoSubmitObj}} </div>
+    {{infoSubmitObj}} </div>
   {{/if}}
 
   {{#if infoErrorsObj }} <div class="col-8 alert alert-danger" role="alert">
-    {{ infoErrorsObj.message}} </div>
+    {{infoErrorsObj}} </div>
   {{/if}} <div class="col-8">
 
     <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
