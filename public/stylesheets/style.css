@@ -59,11 +59,14 @@ h4{
 }
 
 .category__img--large {
-
   height: 330px;
 }
 .category__img img {
- 
+  height: -webkit-fill-available;
   width: 99%;
   object-fit: cover;
 }
+#recipe{
+  background-image:url("/images/recipe-img-rt.png") ;
+}
+

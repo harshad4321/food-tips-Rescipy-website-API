@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const session = require('express-session');
 var cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const flash = require('connect-flash');
@@ -17,16 +18,21 @@ require('dotenv').config()
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
   
-
-
 app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/'}));
 
+
+
+app.use(session({
+  secret: 'Food&TipsSecretSession',
+  saveUninitialized: true,
+  resave: true
+}));
 app.use(flash());
 app.use(fileUpload());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('Food&TipsSecure'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const start =async()=>{
