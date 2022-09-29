@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 m-auto">
+      <h1 class="mt-4 mb-4">Sign Up Page</h1>
+      <h3 class="text-center">Create new account</h3>
+
+      <!-- Flash message -->
+
+      {{#if errorMsg}}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{errorMsg}}!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {{/if}}
+
+
+
+
+      <form action="/users/signup" method="POST">
+        <div class="form-group">
+          <!-- name input -->
+          <label for="name">Name</label>
+          <input type="name" class="form-control" name="name" id="name" required />
+        </div>
+        <!-- Email input -->
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" name="email" id="email" />
+        </div>
+        <!-- Password input -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" id="password" />
+        </div>
+        <div class="form-group">
+          <label for="password2">Verify Password</label>
+          <input type="password" class="form-control" name="confirm_password" id="confirm_password" />
+        </div>
+        <!-- Submit button -->
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+        <button type="submit" class="btn btn-primary button-style" id="Sign-Up">
+          Sign Up
+        </button>
+        <div class=" form-group">
+          <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/user/login"
+              class="fw-bold text-body"><u>Login here</u></a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

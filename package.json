@@ -6,10 +6,12 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
     "bootstrap": "^5.2.0-beta1",
     "bootstrap-icons": "^1.9.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
+    "csurf": "^1.11.0",
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
@@ -18,12 +20,15 @@
     "express-fileupload": "^1.4.0",
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "mongodb": "^4.8.0",
     "mongoose": "^6.4.4",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   },
   "main": "app.js",
   "author": "harshad.n",

@@ -2,17 +2,20 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 const session = require('express-session');
+const passport = require("passport");
 var cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const flash = require('connect-flash');
 var logger = require('morgan');
 const dotenv= require('dotenv');
 var indexRouter = require('./server/routes/index');
-var usersRouter = require('./server/routes/users');
+var usersRouter = require('./server/routes/user');
 var hbs = require('express-handlebars');
 var app = express();
  var connectDB =require('./server/models/connection');// DB connection
 require('dotenv').config()
+require("./config/passport");
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +34,8 @@ app.use(flash());
 app.use(fileUpload());
 app.use(logger('dev'));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('Food&TipsSecure'));
 app.use(express.static(path.join(__dirname, 'public')));
