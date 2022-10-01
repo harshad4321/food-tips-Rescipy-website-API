@@ -4,6 +4,11 @@ const csrf = require("csurf");
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
+
+const User = require("../models/user");
+
+
+
 const middleware = require("../middleware");
 const {
   userSignUpValidationRules,
@@ -17,7 +22,7 @@ router.use(csrfProtection);
 
 
 // GET: display the signup form with csrf token
-router.get("/signup", (req, res) => {
+router.get("/signup",middleware.isNotLoggedIn, (req, res) => {
   var errorMsg = req.flash("error")[0];
   res.render("./user/signup", {
     csrfToken: req.csrfToken(),
@@ -50,7 +55,7 @@ router.post(
         req.session.oldUrl = null;
         res.redirect(oldUrl);
       } else {
-        res.redirect("./user/profile");
+        res.redirect("/users/profile");
       }
     } catch (err) {
       console.log(err);
@@ -61,46 +66,38 @@ router.post(
 );
 
 // GET: display the signin form with csrf token
-router.get("/signin", middleware.isNotLoggedIn, async (req, res) => {
+router.get("/login", middleware.isNotLoggedIn, async (req, res) => {
   var errorMsg = req.flash("error")[0];
-  res.render("user/signin", {
+  res.render("user/login", {
     csrfToken: req.csrfToken(),
     errorMsg,
-    pageName: "Sign In",
+    
   });
 });
 
 // POST: handle the signin logic
 router.post(
-  "/signin",
+  "/login",
   [
     middleware.isNotLoggedIn,
     userSignInValidationRules(),
     validateSignin,
-    passport.authenticate("local.signin", {
-      failureRedirect: "./user/signin",
+    passport.authenticate("local.login", {
+      failureRedirect: "/users/login",
       failureFlash: true,
     }),
   ],
   async (req, res) => {
     try {
-      //  logic when the user logs in
-      // let  = await .findOne({ user: req.user._id });
-      // if there is a  session and user has no , save it to the user's  in db
       if (req.session) {
        
       }
-      // if user has a  in db, load it to session
-      // if () {
- 
-      // }
-      // redirect to old URL before signing in
       if (req.session.oldUrl) {
         var oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
         res.redirect(oldUrl);
       } else {
-        res.redirect("/user/profile");
+        res.redirect("/users/profile");
       }
     } catch (err) {
       console.log(err);
@@ -111,27 +108,46 @@ router.post(
 );
 
 // GET: display user's profile
-router.get("/profile",  async (req, res) => {
-  const successMsg = req.flash("success")[0];
-  const errorMsg = req.flash("error")[0];
+router.get("/profile", middleware.isLoggedIn,async (req, res) => {
   try {
+    const user = await User.findOne({ user: req.user })
+    console.log('>>>>>>><',user);
     // find all  of this user
     res.render("user/profile", {
-     
-      errorMsg,
-      successMsg,
-      pageName: "User Profile",
+  username: req.user.username ,
+  user
     });
-  } catch (err) {
-    console.log(err);
+  } catch (err){
+    console.log(err); 
     return res.redirect("/");
   }
 });
 
+
+
+// // GET: display user's profile
+// router.get("/life",async (req, res) => {
+ 
+//     const user = await User.findOne({ user: req.user })
+//     console.log('>>>>>>><',user);
+//     // find all  of this user
+//   res.send(user)
+// });
+
+
+
+
+
 // GET: logout
 router.get("/logout", middleware.isLoggedIn, (req, res) => {
-  req.logout();
-  
+
+  req.session.destroy();
+
+   req.session = null
+   console.log('   req.session=null>>141',   req.session)
+
   res.redirect("/");
 });
+
+
 module.exports = router;

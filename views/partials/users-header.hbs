@@ -11,8 +11,23 @@
         <li><a href="/submit-recipe" class="nav-link px-2 link-secondary">Submit</a></li>
         <li><a href="/contact" class="nav-link px-2 link-secondary">Contact</a></li>
         <li><a href="/users/signup" class="nav-link px-2 link-secondary">Signup</a></li>
-    </ul>
+        <li><a href="/users/login" class="nav-link px-2 link-secondary">login</a></li>
+        <li><a href="/users/logout" class="nav-link px-2 link-secondary">logout</a></li>
+        <li><a href="/users/profile" class="nav-link px-2 link-secondary">profile</a></li>
+        {{!--
+        <div class="justify-content-center" aria-labelledby="dropdownMenuButton">
 
+            <a class="dropdown-item" href="/users/logout">Logout</a>
+            <a class="dropdown-item" href="/users/my-profile">Profile</a>
+
+            <a class="dropdown-item" href="/users/login">Login</a>
+            <a class="dropdown-item" href="/users/signup">signup</a>
+
+        </div> --}}
+
+
+
+    </ul>
     <div class="col-md-3 text-end">
         <form method="POST" action="/search">
             <input type="search" name="searchTerm" class="form-control" placeholder="Search..." aria-label="Search">

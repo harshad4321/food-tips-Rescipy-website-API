@@ -69,7 +69,7 @@ const validateSignin = (req, res, next) => {
       messages.push(error.msg);
     });
     req.flash("error", messages);
-    return res.redirect("/user/signin");
+    return res.redirect("/users/login");
   }
   next();
 };

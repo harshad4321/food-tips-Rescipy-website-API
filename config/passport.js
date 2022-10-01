@@ -1,14 +1,18 @@
+const { json } = require("express");
 const passport = require("passport");
 // load all the things we need
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("../server/models/user");
 
-passport.serializeUser((user, done) => {
+ passport.serializeUser((user, done) => {
+
+
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
+    // console.log('user >>>>>12',user)
     done(err, user);
   });
 });
@@ -31,9 +35,10 @@ passport.use(
  // if there is no user with that email
  // create the user
         const newUser =  new User();
+       
         newUser.email = email;
         newUser.password = newUser.encryptPassword(password);
-        console.log( newUser.password )
+      
    
         newUser.username = req.body.name;
  // save the user
@@ -48,7 +53,7 @@ passport.use(
 );
 
 passport.use(
-  "local.signin",
+  "local.login",
   new LocalStrategy(
     {
       usernameField: "email",
@@ -59,6 +64,7 @@ passport.use(
       try {
         const user = await User.findOne({ email: email });
         if (!user) {
+        
           return done(null, false, { message: "User doesn't exist" });
         }
         if (!user.validPassword(password)) {
