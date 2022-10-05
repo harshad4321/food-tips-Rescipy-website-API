@@ -5,7 +5,7 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
 
-const User = require("../models/user");
+const User = require("../models/userdata");
 
 
 
@@ -110,11 +110,10 @@ router.post(
 // GET: display user's profile
 router.get("/profile", middleware.isLoggedIn,async (req, res) => {
   try {
-    const user = await User.findOne({ user: req.user })
-    console.log('>>>>>>><',user);
-    // find all  of this user
+    const user = await User.findById(req.user.id)
+   email=req.user.email 
     res.render("user/profile", {
-  username: req.user.username ,
+  
   user
     });
   } catch (err){
@@ -123,16 +122,6 @@ router.get("/profile", middleware.isLoggedIn,async (req, res) => {
   }
 });
 
-
-
-// // GET: display user's profile
-// router.get("/life",async (req, res) => {
- 
-//     const user = await User.findOne({ user: req.user })
-//     console.log('>>>>>>><',user);
-//     // find all  of this user
-//   res.send(user)
-// });
 
 
 

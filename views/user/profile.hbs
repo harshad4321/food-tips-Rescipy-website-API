@@ -101,11 +101,14 @@
                   <div class="card mb-4 mb-lg-0">
                     <div class="card-body p-0">
                       <ul class="list-group list-group-flush rounded-3">
-
                         <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-
                         </li>
 
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                          <a href="/update">
+                            <p class="mb-0">update recipies</p>
+                          </a>
+                        </li>
 
                         <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                           <a href="/users/logout">
@@ -125,24 +128,29 @@
                           <!--Grid column-->
                           <div class="col-md-12 mb-md-0 mb-5">
 
+                            <!--Grid column-->
+                            <div class="col-md-6">
+                              <div class="md-form mb-0">
+                                <input type="text" id="profileFirstName" name="profileFirstName" class="form-control"
+                                  value="{{#each user}}{{username}}{{/each}}" readonly>
+
+                                <label for="name" class=""></label>
+                              </div>
+                            </div>
+                            <!--Grid column-->
+
+                            <!--Grid column-->
                             <!--Grid row-->
                             <div class="row">
-                              {{#if user}}
-                              <!--Grid column-->
-                              <div class="col-md-6">
+                              <div class="col-md-12">
                                 <div class="md-form mb-0">
-                                  Name:<input type="text" id="profileFirstName" name="profileFirstName"
-                                    class="form-control" value="{{username}}" readonly>
-
-                                  <label for="name" class=""></label>
+                                  <input type="text" id="profileEmail" name="profileEmail" class="form-control"
+                                    value="{{#each user}}{{email}}{{/each}}" readonly><label for="name"
+                                    class=""></label>
                                 </div>
                               </div>
-                              {{/if}}
-                              <!--Grid column-->
-
-                              <!--Grid column-->
-
                             </div>
+                            <!--Grid row-->
                             <!--Grid row-->
 
 
@@ -165,10 +173,9 @@
                         <!--Grid column-->
                       </section>
                     </div>
-                    {{#if user}}
                     <div class="card-body">
                       <div class="col-lg-6 mx-auto">
-                        <p>Hello {{username}}</p>
+                        <p>Hello {{#each user}}{{username}} {{/each}}</p>
                         <p class="lead mb-4">
                           Publish your Recipe in front of thousands of people for
                           free.</p>
@@ -176,7 +183,6 @@
                           <a href="/submit-recipe" class="btn btn-primary btn-dark btn-lg">Submit Recipe</a>
                         </div>
                       </div>
-                      {{/if}}
                     </div>
                   </div>
                 </div>

@@ -1,5 +1,8 @@
 <div class="px-4 py-5 my-5 text-center">
-  <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
+
+  <h1 class="display-5 fw-bold"> {{#each user}}{{username}} {{/each}},</h1>
+
+  <h4 class="display-5 fw-bold">Submit Your Recipe</h4>
   <div class="col-lg-6 mx-auto">
     <p class="lead">Share your amazing recipies . Fill our form to get
       started.</p>
@@ -23,8 +26,18 @@
 
         <div class="col-12">
           <label for="email" class="form-label">Email</label>
-          <input type="email" name="email" id="email" class="form-control">
+          <input type="email" id="email" name="email" class="form-control" value="{{#each user}}{{email}}{{/each}}"
+            readonly="true">
+
         </div>
+
+
+        <div class="col-12">
+          <label for="userId" class="form-label" hidden="true">userId</label>
+          <input type="userId" id="userId" name="userId" class="form-control" value="{{#each user}}{{_id}}{{/each}}"
+            hidden="true">
+        </div>
+
 
         <div class="col-12">
           <label for="name" class="form-label">Recipe Name</label>
@@ -68,7 +81,7 @@
         </div>
 
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Submit Recipe</button>
+          <button onclick="submit('{{#each user}}{{_id}}{{/each}}')" class="btn btn-primary">Submit Recipe</button>
         </div>
 
       </div>

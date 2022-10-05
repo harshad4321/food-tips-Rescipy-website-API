@@ -1,7 +1,10 @@
 require('../models/connection');
+const { info } = require('console');
+const { response, json } = require('express');
+const { use } = require('passport');
 const Category = require('../models/Category_Schema');
 const Recipe = require('../models/Recipe_Schema');
-
+const User = require("../models/userdata");
 
 /**
  * GET /
@@ -20,7 +23,7 @@ exports.homepage = async(req, res) => {
     const variety_dish = await Recipe.find({ 'category': 'variety dish' }).limit(limitNumber);
     const Lunch = await Recipe.find({ 'category': 'Lunch' }).limit(limitNumber);
  
-    // console.log('food>>>>>>>>',food)
+    
     console.log('categories>>>>>>',categories)
     res.render('index', {categories,recipes,Breakfast,Snacks,variety_dish,Lunch} );
   } catch (error) {
@@ -119,9 +122,13 @@ exports.exploreRandom = async(req, res) => {
  * Submit Recipe
 */
 exports.submitRecipe = async(req, res) => {
+  // const user = await User.findOne({ user: req.user })
+  const user = await User.findById(req.user.id)
+   
   const infoErrorsObj = req.flash('infoErrors')[0];
   const infoSubmitObj = req.flash('infoSubmit');
-  res.render('submit-recipe', { title: 'Submit Recipe', infoErrorsObj, infoSubmitObj  } );
+  res.render('submit-recipe', 
+  { title: 'Submit Recipe', infoErrorsObj, infoSubmitObj , user,} );
 }
 
 /**
@@ -129,8 +136,7 @@ exports.submitRecipe = async(req, res) => {
  * Submit Recipe
 */
 exports.submitRecipeOnPost = async(req, res) => {
-  try {
-
+  try { 
     let imageUploadFile;
     let uploadPath;
     let newImageName;
@@ -138,6 +144,7 @@ exports.submitRecipeOnPost = async(req, res) => {
     if(!req.files || Object.keys(req.files).length === 0){
       console.log('No Files where uploaded.');
     } else {
+
       imageUploadFile = req.files.image;
       newImageName = Date.now() + imageUploadFile.name;
       uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
@@ -146,14 +153,15 @@ exports.submitRecipeOnPost = async(req, res) => {
       })
 
     }
-
     const newRecipe = new Recipe({
       name: req.body.name,
       description: req.body.description,
       email: req.body.email,
+      userId:req.user.id,
       ingredients: req.body.ingredients,
       category: req.body.category,
-      image: newImageName
+      image: newImageName,
+      
     });
     
     await newRecipe.save();
@@ -168,25 +176,100 @@ exports.submitRecipeOnPost = async(req, res) => {
 }
 
 
-// Delete Recipe
-// async function deleteRecipe(){
-//   try {
-//     await Recipe.deleteOne({ name: 'New Recipe From Form' });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-// deleteRecipe();
+
+
 
 
 // Update Recipe
-// async function updateRecipe(){
-//   try {
-//     const res = await Recipe.updateOne({ name: 'New Recipe' }, { name: 'New Recipe Updated' });
-//     res.n; // Number of documents matched
-//     res.nModified; // Number of documents modified
-//   } catch (error) {
-//     console.log(error);
-//   }
+exports. updateRecipe= async(req,res)=>{
+  const user = await User.findById(req.user.id)   
+  const test  =await Recipe.find({'userId': {$exists: true}})
+  let userId = req.user.id
+if(test){
+   await Recipe.aggregate([
+    { "$match": { "userId":userId } } 
+])
+try {
+  const recipe  = await (await Recipe.find()).filter(recipe => recipe.userId)
+  //  var id = req.recipe.id
+  console.log('recipes>>>>>>>',recipe)
+  // console.log('recipes>>>>>>>',id)
+  res.render('user/update', 
+  {
+ recipe,
+ user,
+  })
+ } catch (error) {
+   console.log(error);
+ }
+ 
+}else{
+
+  console.log('some thing is wrong...')
+  redirect('/')
+}
+
+
+  console.log('>>>crom>>>',crom)
+
+  console.log('>>>test>>><<<<<<<<<<<',test)
+ 
+}
+
+
+
+
+
+
+ // try {
+ //   const res = await Recipe.updateOne({ name: 'New Recipe' }, { name: 'New Recipe Updated' });
+ //   res.n; // Number of documents matched
+ //   res.nModified; // Number of documents modified
+ // } catch (error) {
+ //   console.log(error);
+ // }
+
+
+
+
+// // Update Recipe
+// exports. updateRecipe= async()=>{
+
+//    if(req.body.userId ===  req.params.id){
+//     res.send ('hai')
+//    }else{
+//     res.send ('err')
+//    }
+
+//   // try {
+//   //   const res = await Recipe.updateOne({ name: 'New Recipe' }, { name: 'New Recipe Updated' });
+//   //   res.n; // Number of documents matched
+//   //   res.nModified; // Number of documents modified
+//   // } catch (error) {
+//   //   console.log(error);
+//   // }
 // }
-// updateRecipe();
+
+
+
+
+
+
+
+// Delete Recipe
+
+
+  exports. deleteRecipe= async()=>{
+    if(req.body.userId){
+     
+           }
+  // try {
+ 
+  //   await Recipe.deleteOne({ name: 'New Recipe From Form' });
+  // } catch (error) {
+  //   console.log(error);
+  // }
+}
+// deleteRecipe();
+
+
