@@ -22,17 +22,17 @@ router.use(csrfProtection);
 
 
 // GET: display the signup form with csrf token
-router.get("/signup",middleware.isNotLoggedIn, (req, res) => {
+router.get("/signup", middleware.isNotLoggedIn, (req, res) => {
   var errorMsg = req.flash("error")[0];
   res.render("./user/signup", {
     csrfToken: req.csrfToken(),
     errorMsg,
-    
+
   });
 });
 // POST: handle the signup logic
 router.post(
-  "/signup", 
+  "/signup",
   [
 
     userSignUpValidationRules(),
@@ -40,14 +40,14 @@ router.post(
     passport.authenticate("local.signup", {
       successRedirect: "/users/profile",
       failureRedirect: "/users/signup",
-      failureFlash: true, 
+      failureFlash: true,
     }),
   ],
   async (req, res) => {
     try {
       //if there is  session, save it to the user's  in db
       if (req.session) {
-     
+
       }
       // redirect to the previous URL
       if (req.session.oldUrl) {
@@ -71,7 +71,7 @@ router.get("/login", middleware.isNotLoggedIn, async (req, res) => {
   res.render("user/login", {
     csrfToken: req.csrfToken(),
     errorMsg,
-    
+
   });
 });
 
@@ -90,7 +90,7 @@ router.post(
   async (req, res) => {
     try {
       if (req.session) {
-       
+
       }
       if (req.session.oldUrl) {
         var oldUrl = req.session.oldUrl;
@@ -108,21 +108,19 @@ router.post(
 );
 
 // GET: display user's profile
-router.get("/profile", middleware.isLoggedIn,async (req, res) => {
+router.get("/profile", middleware.isLoggedIn, async (req, res) => {
   try {
     const user = await User.findById(req.user.id)
-   email=req.user.email 
+    email = req.user.email
     res.render("user/profile", {
-  
-  user
+
+      user
     });
-  } catch (err){
-    console.log(err); 
+  } catch (err) {
+    console.log(err);
     return res.redirect("/");
   }
 });
-
-
 
 
 
@@ -132,8 +130,8 @@ router.get("/logout", middleware.isLoggedIn, (req, res) => {
 
   req.session.destroy();
 
-   req.session = null
-   console.log('   req.session=null>>141',   req.session)
+  req.session = null
+  console.log('   req.session=null>>141', req.session)
 
   res.redirect("/");
 });

@@ -9,9 +9,9 @@ const userSchema = Schema({
   },
   email: {
     type: String,
-    select: false ,
+    select: false,
     require: true,
-    
+
   },
   password: {
     type: String,
@@ -21,9 +21,9 @@ const userSchema = Schema({
 
 // encrypt the password before storing
 userSchema.methods.encryptPassword = (password) => {
-  console.log('password>>>>',userSchema.methods.encryptPassword )
+  console.log('password>>>>', userSchema.methods.encryptPassword)
   return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
- 
+
 };
 
 userSchema.methods.validPassword = function (candidatePassword) {
@@ -35,4 +35,3 @@ userSchema.methods.validPassword = function (candidatePassword) {
 };
 
 module.exports = mongoose.model("User", userSchema);
- 

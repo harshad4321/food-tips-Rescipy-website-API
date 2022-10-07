@@ -3,16 +3,12 @@ const passport = require("passport");
 // load all the things we need
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("../server/models/user");
-
- passport.serializeUser((user, done) => {
-
-
+passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
-    // console.log('user >>>>>12',user)
     done(err, user);
   });
 });
@@ -20,28 +16,25 @@ passport.deserializeUser((id, done) => {
 passport.use(
   "local.signup",
   new LocalStrategy({
-// by default, local strategy uses username and password, we will override with email
-      usernameField: "email",
-      passwordField: "password",
-      passReqToCallback: true, // allows us to pass back the entire request to the callback
-    },
+    // by default, local strategy uses username and password, we will override with email
+    usernameField: "email",
+    passwordField: "password",
+    passReqToCallback: true, // allows us to pass back the entire request to the callback
+  },
     async (req, email, password, done) => {
       try {
         const user = await User.findOne({ email: email });
         if (user) {
           return done(null, false, { message: "Email already exists" });
         }
-       
- // if there is no user with that email
- // create the user
-        const newUser =  new User();
-       
+
+        // if there is no user with that email
+        // create the user
+        const newUser = new User();
         newUser.email = email;
         newUser.password = newUser.encryptPassword(password);
-      
-   
         newUser.username = req.body.name;
- // save the user
+        // save the user
         await newUser.save();
         return done(null, newUser);
       } catch (error) {
@@ -64,7 +57,7 @@ passport.use(
       try {
         const user = await User.findOne({ email: email });
         if (!user) {
-        
+
           return done(null, false, { message: "User doesn't exist" });
         }
         if (!user.validPassword(password)) {
