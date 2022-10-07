@@ -1,11 +1,11 @@
 require('../models/connection');
-const { info } = require('console');
-const { response, json } = require('express');
-const { use } = require('passport');
+
 const Category = require('../models/Category_Schema');
 const Recipe = require('../models/Recipe_Schema');
+const Recipes = require('../models/recipe');
 const User = require("../models/userdata");
-
+const recipeHelpers = require('../../helpers/recipe-helper')
+var objectId=require('mongodb').ObjectId
 /**
  * GET /
  * Homepage  
@@ -122,7 +122,7 @@ exports.exploreRandom = async(req, res) => {
  * Submit Recipe
 */
 exports.submitRecipe = async(req, res) => {
-  // const user = await User.findOne({ user: req.user })
+ 
   const user = await User.findById(req.user.id)
    
   const infoErrorsObj = req.flash('infoErrors')[0];
@@ -171,32 +171,29 @@ exports.submitRecipeOnPost = async(req, res) => {
   } catch (error) {
     // res.json(error);
     req.flash('infoErrors', 'Please,Add all the details of this Recipe');
-    res.redirect('/submit-recipe');
+    res.redirect('/submit-recipe'); 
   }
 }
 
 
 
 
-
-
-// Update Recipe
-exports. updateRecipe= async(req,res)=>{
+/**
+ * GET /view-recipe
+*/
+exports.viewRecipe  = async(req, res) => {
   const user = await User.findById(req.user.id)   
-  const test  =await Recipe.find({'userId': {$exists: true}})
-  let userId = req.user.id
-if(test){
-   await Recipe.aggregate([
-    { "$match": { "userId":userId } } 
+
+  let userID = req.user.id
+let  recipe = await Recipe.aggregate([
+  { "$match": { "userId":userID } } 
 ])
+
+if(recipe){
 try {
-  const recipe  = await (await Recipe.find()).filter(recipe => recipe.userId)
-  //  var id = req.recipe.id
-  console.log('recipes>>>>>>>',recipe)
-  // console.log('recipes>>>>>>>',id)
-  res.render('user/update', 
+  res.render('view-recipe', 
   {
- recipe,
+   recipe,
  user,
   })
  } catch (error) {
@@ -208,48 +205,7 @@ try {
   console.log('some thing is wrong...')
   redirect('/')
 }
-
-
-  console.log('>>>crom>>>',crom)
-
-  console.log('>>>test>>><<<<<<<<<<<',test)
- 
 }
-
-
-
-
-
-
- // try {
- //   const res = await Recipe.updateOne({ name: 'New Recipe' }, { name: 'New Recipe Updated' });
- //   res.n; // Number of documents matched
- //   res.nModified; // Number of documents modified
- // } catch (error) {
- //   console.log(error);
- // }
-
-
-
-
-// // Update Recipe
-// exports. updateRecipe= async()=>{
-
-//    if(req.body.userId ===  req.params.id){
-//     res.send ('hai')
-//    }else{
-//     res.send ('err')
-//    }
-
-//   // try {
-//   //   const res = await Recipe.updateOne({ name: 'New Recipe' }, { name: 'New Recipe Updated' });
-//   //   res.n; // Number of documents matched
-//   //   res.nModified; // Number of documents modified
-//   // } catch (error) {
-//   //   console.log(error);
-//   // }
-// }
-
 
 
 
@@ -258,18 +214,81 @@ try {
 
 // Delete Recipe
 
-
-  exports. deleteRecipe= async()=>{
-    if(req.body.userId){
-     
-           }
-  // try {
- 
-  //   await Recipe.deleteOne({ name: 'New Recipe From Form' });
-  // } catch (error) {
-  //   console.log(error);
-  // }
+exports. deleteRecipe= async(req,res)=>{
+    
+  let proId =req.params.id 
+console.log(proId);
+recipeHelpers.deleteRecipe(proId).then((response )=>{
+res.redirect('/view-recipe')
+})
 }
-// deleteRecipe();
+
+
+
+
+/**
+ * GET /Update Recipe
+*/
+exports. updateRecipe= async(req,res)=>{
+
+  const infoErrorsObj = req.flash('infoErrors')[0];
+  const infoSubmitObj = req.flash('infoSubmit');
+  
+  const user = await User.findById(req.user.id)   
+
+let recipe =await  recipeHelpers.getRecipeDetails(req.params.id)
+try {
+  res.render('user/update', 
+  {
+ user,
+ recipe,
+ infoSubmitObj ,
+ infoErrorsObj, 
+  })
+ } catch (error) {
+   console.log(error);
+ }
+ 
+}
+
+
+exports. updateRecipeSubmit= async(req,res)=>{
+  
+  recipeHelpers.updateRecipe(req.params.id,req.body)
+
+  res.render('user/update')
+
+  let imageUploadFile;
+  let uploadPath;
+  let newImageName;
+
+   if (req.files && req.files.Image){
+    
+      imageUploadFile = req.files.Image;
+      newImageName = Date.now() + imageUploadFile.name;
+      uploadPath = require('path').resolve('./') +'/public/uploads/' + newImageName;
+      imageUploadFile.mv(uploadPath, function(err){  
+        if(err) return res.satus(500).send(err);
+     
+      imageid =newImageName
+
+      let proId =req.params.id 
+    
+       Recipe.findByIdAndUpdate({_id:objectId(proId)}, {$set:{'image':imageid}}, {new: true}, (err, doc) => {
+        if (err) {
+            console.log("Something wrong when updating data!");
+        }
+       
+      })
+      
+    })
+     
+    }
+    else{
+      console.log(' image is not')
+    }
+  }
+   
+  
 
 

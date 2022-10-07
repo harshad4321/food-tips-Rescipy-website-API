@@ -14,11 +14,13 @@ router.get('/categories', recipeController.exploreCategories);
 router.get('/categories/:id', recipeController.exploreCategoriesById);
 router.post('/search', recipeController.searchRecipe );
 router.get('/explore-latest', recipeController.exploreLatest);
-router.get('/explore-random', recipeController.exploreRandom);
+router.get('/explore-random', recipeController.exploreRandom   );
 router.get('/submit-recipe', middleware.isLoggedIn, recipeController.submitRecipe);
 router.post('/submit-recipe', recipeController.submitRecipeOnPost);
-router.get('/update', recipeController.updateRecipe);
-router.put('/delete/', recipeController.deleteRecipe);
+router.get('/view-recipe',middleware.isLoggedIn,recipeController.viewRecipe);
+router.get('/update/:id',middleware.isLoggedIn,recipeController.updateRecipe);
+router.post('/update/:id',middleware.isLoggedIn,recipeController.updateRecipeSubmit);
+router.get('/delete/:id', recipeController.deleteRecipe);
 module.exports = router;
 
 

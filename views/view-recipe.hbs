@@ -1,0 +1,65 @@
+{{!-- view-product --}}
+{{#if recipe}}
+<section>
+    <div class="container">
+        <div class="card-body">
+            <div class="col-lg-6 mx-auto">
+                <p>Hello {{#each user}}{{username}} {{/each}}</p>
+                <p class="lead mb-4">
+                    Publish your Recipe in front of thousands of people for
+                    free.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="/submit-recipe" class="btn btn-primary btn-dark btn-lg">Submit Recipe</a>
+                </div>
+            </div>
+        </div>
+        <table class="table mt-5" id="table_id">
+            <thead>
+                <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">Recipe</th>
+                    <th scope="col">Category</th>
+
+                    <th scope="col">Description</th>
+                    <th>images</th>
+                    <th>options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each recipe}}
+                <tr>
+                    <th scope="row">1</th>
+                    <td> {{name}}</td>
+                    <td>{{category}}</td>
+                    <td>{{description}}</td>
+
+                    <td><img style="width:60px; height:60px" , src="../..//uploads/{{image}}" , alt="">
+                    </td>
+                    <td>
+                        <a href="/update/{{_id}}" id="successEdit" class=" btn btn-success">Edit</a>
+                        <a href="/delete/{{_id}}" id="successDelete" class=" btn btn-danger"
+                            onclick="return confirm('Are you want to delete {{name}} ?')">
+                            Delete</a>
+
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{else}}
+    <!-- Submit - Start -->
+    <section class="px-4 py-5 my-5 text-center">
+        <img src="/images/photo-cooking.jpg" class="d-block mx-auto mb-4 img-fluid"
+            alt="Publish your recipe for FREE today" width="566" height="208" loading="lazy">
+        <img src="/images/istockphoto-cook.jpg" width="566" height="208" loading="lazy">
+        <h1 class="display-5 fw-bold">Publish your recipe for FREE today</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Publish your Recipe in front of thousands of people for free.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="/submit-recipe" class="btn btn-primary btn-dark btn-lg">Submit Recipe</a>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+</section>

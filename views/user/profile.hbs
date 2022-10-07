@@ -111,6 +111,12 @@
                         </li>
 
                         <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                          <a href="/view-recipe">
+                            <p class="mb-0">view recipies</p>
+                          </a>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                           <a href="/users/logout">
                             <p class="mb-0">Logout</p>
                           </a>
@@ -175,15 +181,14 @@
                     </div>
                     <div class="card-body">
                       <div class="col-lg-6 mx-auto">
-                        <p>Hello {{#each user}}{{username}} {{/each}}</p>
-                        <p class="lead mb-4">
-                          Publish your Recipe in front of thousands of people for
-                          free.</p>
-                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                          <a href="/submit-recipe" class="btn btn-primary btn-dark btn-lg">Submit Recipe</a>
-                        </div>
+                        <p class=""> Hello ,{{#each user}}{{username}} {{/each}}</p>
+                        <h4 class="">Do you Want to Update your Recipes</h4>
+                        <a href="/view-recipe" class="btn btn-primary btn-dark btn-lg">view Your Recipe</a>
+                        </di>
                       </div>
                     </div>
+
+
                   </div>
                 </div>
               </div>
