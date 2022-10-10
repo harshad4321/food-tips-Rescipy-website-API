@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 
 const connectDB = async (url) => {
     return await mongoose.connect(url)
-        .then(() => console.log('connected to db...'))
-        .catch((error) => console.log(error))
+        .then(() => console.log(`connected to db...`.yellow.underline.bold))
+        .catch((error) => console.log(error) + red.underline.bold)
 
 }
 

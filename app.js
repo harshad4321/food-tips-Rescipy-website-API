@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 const session = require('express-session');
 const passport = require("passport");
+const colors = require('colors');
 var cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const flash = require('connect-flash');

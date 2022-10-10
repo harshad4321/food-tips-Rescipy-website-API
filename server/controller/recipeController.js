@@ -1,24 +1,27 @@
 require('../models/connection');
+
 const Category = require('../models/Category_Schema');
 const Recipe = require('../models/Recipe_Schema');
 const User = require("../models/userdata");
 const recipeHelpers = require('../../helpers/recipe-helper')
 var objectId = require('mongodb').ObjectId
+
 /**
  * GET /
  * Homepage  
 */
 
-
 exports.homepage = async (req, res) => {
   try {
     const limitNumber = 4;
     const categories = await Category.find({}).limit(limitNumber);
+
     const recipes = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
     const Breakfast = await Recipe.find({ 'category': 'Breakfast' }).limit(limitNumber);
     const Snacks = await Recipe.find({ 'category': 'Snacks' }).limit(limitNumber);
     const variety_dish = await Recipe.find({ 'category': 'variety dish' }).limit(limitNumber);
     const Lunch = await Recipe.find({ 'category': 'Lunch' }).limit(limitNumber);
+
 
     console.log('categories>>>>>>', categories)
     res.render('index', { categories, recipes, Breakfast, Snacks, variety_dish, Lunch });
@@ -209,8 +212,8 @@ exports.viewRecipe = async (req, res) => {
 
 /**
  * get /Delete Recipe
- * Delete Recipe
 */
+
 
 exports.deleteRecipe = async (req, res) => {
 
@@ -224,7 +227,6 @@ exports.deleteRecipe = async (req, res) => {
 /**
  * GET /Update Recipe
 */
-
 exports.updateRecipe = async (req, res) => {
 
   const infoErrorsObj = req.flash('infoErrors')[0];
@@ -247,9 +249,6 @@ exports.updateRecipe = async (req, res) => {
 
 }
 
-/**
- * post /Update Recipe
-*/
 
 exports.updateRecipeSubmit = async (req, res) => {
   recipeHelpers.updateRecipe(req.params.id, req.body)
